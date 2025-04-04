@@ -58,6 +58,28 @@
                     "DEBUG": "1"
                 }
             }
+        ],
+        "dependencies": [
+            {
+                "name": "com.symfony.uid",
+                "version": "latest",
+                "source": "symfony/uid=latest@packagist"
+            },
+            {
+                "name": "net.nosial.configlib",
+                "version": "latest",
+                "source": "nosial/configlib=latest@github"
+            },
+            {
+                "name": "net.nosial.loglib2",
+                "version": "latest",
+                "source": "nosial/loglib2=latest@github"
+            },
+            {
+                "name": "net.nosial.optslib",
+                "version": "latest",
+                "source": "nosial/optslib=latest@github"
+            }
         ]
     },
     "execution_policies": [
