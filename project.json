@@ -1,0 +1,77 @@
+{
+    "project": {
+        "compiler": {
+            "extension": "php",
+            "minimum_version": "8.2",
+            "maximum_version": "8.0"
+        },
+        "options": {
+            "create_symlink": true
+        }
+    },
+    "assembly": {
+        "name": "FileServer",
+        "package": "net.nosial.file_server",
+        "description": "A simple standard HTTP file upload server",
+        "version": "1.0.0",
+        "uuid": "8ee504ac-b27f-4f67-9730-ab3904be916c"
+    },
+    "build": {
+        "source_path": "src",
+        "default_configuration": "release",
+        "main": "main_policy",
+        "define_constants": {
+            "ASSEMBLY_PACKAGE": "%ASSEMBLY.PACKAGE%",
+            "ASSEMBLY_VERSION": "%ASSEMBLY.VERSION%",
+            "ASSEMBLY_UID": "%ASSEMBLY.UID%"
+        },
+        "configurations": [
+            {
+                "name": "release",
+                "build_type": "ncc",
+                "output": "build/release/%ASSEMBLY.PACKAGE%.ncc"
+            },
+            {
+                "name": "debug",
+                "build_type": "ncc",
+                "output": "build/debug/%ASSEMBLY.PACKAGE%.ncc",
+                "define_constants": {
+                    "DEBUG": "1"
+                }
+            },
+            {
+                "name": "release_executable",
+                "build_type": "executable",
+                "output": "build/release/%ASSEMBLY.NAME%",
+                "options": {
+                    "ncc_configuration": "release"
+                }
+            },
+            {
+                "name": "debug_executable",
+                "build_type": "executable",
+                "output": "build/debug/%ASSEMBLY.NAME%",
+                "options": {
+                    "ncc_configuration": "debug"
+                },
+                "define_constants": {
+                    "DEBUG": "1"
+                }
+            }
+        ]
+    },
+    "execution_policies": [
+        {
+            "name": "main_policy",
+            "runner": "php",
+            "execute": {
+                "working_directory": "%CWD%",
+                "silent": false,
+                "tty": true,
+                "timeout": null,
+                "idle_timeout": null,
+                "target": "main"
+            }
+        }
+    ]
+}
