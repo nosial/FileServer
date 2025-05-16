@@ -25,12 +25,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          IMAGE_NAME=$(echo ${{ github.repository }} | cut -d'/' -f2)
+          IMAGE_NAME=$(echo ${{ github.repository }} | cut -d'/' -f2 | tr '[:upper:]' '[:lower:]')
           docker build -t $IMAGE_NAME:${{ github.sha }} .
 
       - name: Save Docker image as .tar artifact
         run: |
-          IMAGE_NAME=$(echo ${{ github.repository }} | cut -d'/' -f2)
+          IMAGE_NAME=$(echo ${{ github.repository }} | cut -d'/' -f2 | tr '[:upper:]' '[:lower:]')
           docker save $IMAGE_NAME:${{ github.sha }} > docker-image-${{ github.sha }}.tar
 
       - name: Upload artifact
