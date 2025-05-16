@@ -17,7 +17,7 @@ debug_executable:
 
 
 install: release
-	ncc package install --package=build/release/net.nosial.file_server.ncc --skip-dependencies --build-source --reinstall -y --log-level $(LOG_LEVEL)
+	ncc package install --package=build/release/net.nosial.fileserver.ncc --skip-dependencies --build-source --reinstall -y --log-level $(LOG_LEVEL)
 
 test: release
 	[ -f phpunit.xml ] || { echo "phpunit.xml not found"; exit 1; }

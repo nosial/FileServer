@@ -2,6 +2,8 @@
 
     namespace FileServer;
 
+    use FileServer\Classes\Configuration;
+
     class Program
     {
         /**
@@ -12,7 +14,7 @@
          */
         public static function main(array $args): int
         {
-            print("Hello World from net.nosial.file_server!" . PHP_EOL);
+            Configuration::getConfigurationLib();
             return 0;
         }
     }

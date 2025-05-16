@@ -1,0 +1,57 @@
+services:
+  fileserver:
+    container_name: fileserver
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Unique port for File Server instance
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      shared_network:
+        aliases:
+          - fileserver
+    restart: unless-stopped
+    volumes:
+      - ./fileserver/config:/etc/config:z
+      - ./fileserver/uploads:/etc/fileserver:z
+      - ./fileserver/logs:/var/log:z
+    environment:
+      # No need to change these values
+      LOG_LEVEL: ${LOG_LEVEL:-debug}
+      CONFIGLIB_PATH: /etc/config
+
+  mariadb:
+    container_name: fileserver_mariadb
+    image: mariadb:10.5
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-fileserver_root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-fileserver}
+      MYSQL_USER: ${MYSQL_USER:-fileserver}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-fileserver}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - shared_network
+    ports:
+      - "3308:3306"
+    expose:
+      - "3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "fileserver_mariadb", "-u", "${MYSQL_USER:-fileserver}", "-p${MYSQL_PASSWORD:-fileserver}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  mariadb_data:
+    driver: local
+
+networks:
+  shared_network:
+    name: fileserver_network
+    driver: bridge

@@ -11,7 +11,7 @@
     },
     "assembly": {
         "name": "FileServer",
-        "package": "net.nosial.file_server",
+        "package": "net.nosial.fileserver",
         "description": "A simple standard HTTP file upload server",
         "version": "1.0.0",
         "uuid": "8ee504ac-b27f-4f67-9730-ab3904be916c"

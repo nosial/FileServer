@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release
-          path: build/release/net.nosial.file_server.ncc
+          path: build/release/net.nosial.fileserver.ncc
   debug:
     runs-on: ubuntu-latest
     container:
@@ -106,7 +106,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: debug
-          path: build/debug/net.nosial.file_server.ncc
+          path: build/debug/net.nosial.fileserver.ncc
   release_executable:
     runs-on: ubuntu-latest
     container:
@@ -327,7 +327,7 @@ jobs:
 
       - name: Install NCC packages
         run: |
-          ncc package install --package="release/net.nosial.file_server.ncc" --build-source --reinstall -y --log-level debug
+          ncc package install --package="release/net.nosial.fileserver.ncc" --build-source --reinstall -y --log-level debug
 
       - name: Run PHPUnit tests
         run: |

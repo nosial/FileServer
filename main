@@ -2,7 +2,7 @@
 
     if (PHP_SAPI !== 'cli')
     {
-        print('net.nosial.file_server must be run from the command line.' . PHP_EOL);
+        print('net.nosial.fileserver must be run from the command line.' . PHP_EOL);
         exit(1);
     }
 
@@ -14,11 +14,11 @@
         }
         else
         {
-            print('net.nosial.file_server failed to run, no $argv found.' . PHP_EOL);
+            print('net.nosial.fileserver failed to run, no $argv found.' . PHP_EOL);
             exit(1);
         }
     }
 
     require('ncc');
-    \ncc\Classes\Runtime::import('net.nosial.file_server', 'latest');
+    \ncc\Classes\Runtime::import('net.nosial.fileserver', 'latest');
 	exit(\FileServer\Program::main($argv));
